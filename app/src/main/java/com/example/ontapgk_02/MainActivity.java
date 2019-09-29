@@ -1,7 +1,9 @@
 package com.example.ontapgk_02;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -94,8 +96,7 @@ public class MainActivity extends AppCompatActivity {
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                arrEmp.remove(vitri);
-                adapter.notifyDataSetChanged();
+               XacNhanXoa();
             }
         });
     }
@@ -110,5 +111,30 @@ public class MainActivity extends AppCompatActivity {
         lv = findViewById(R.id.listview);
 
 
+    }
+
+    public void XacNhanXoa(){
+        AlertDialog.Builder alertdialog = new AlertDialog.Builder(this);
+        alertdialog.setTitle("Thông báo");
+        alertdialog.setIcon(R.mipmap.ic_launcher);
+        alertdialog.setMessage("Bạn có chắc muốn xóa không ?");
+        alertdialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                arrEmp.remove(vitri);
+                adapter.notifyDataSetChanged();
+                txtMa.setText("");
+                txtTen.setText("");
+            }
+        });
+        alertdialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        alertdialog.show();
     }
 }
